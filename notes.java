@@ -54,3 +54,17 @@ android {
         }
     }
 }
+#!/bin/bash
+
+# Đường dẫn đến tệp APK đã được build
+APK_PATH="app/build/outputs/apk/debug/app-debug.apk"
+
+# Kiểm tra xem có thiết bị Android nào được kết nối không
+devices=$(adb devices)
+if [[ $devices != *"device"* ]]; then
+    echo "Không có thiết bị Android nào được kết nối."
+else
+    echo "Đang cài đặt APK lên thiết bị..."
+    adb install -r "$APK_PATH" # -r để ghi đè nếu APK đã tồn tại
+    echo "Cài đặt hoàn tất."
+fi
