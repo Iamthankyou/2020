@@ -68,3 +68,16 @@ else
     adb install -r "$APK_PATH" # -r để ghi đè nếu APK đã tồn tại
     echo "Cài đặt hoàn tất."
 fi
+android {
+    // ...
+
+    applicationVariants.all { variant ->
+        if (variant.buildType.name == "debug") { // Thay đổi thành build type của bạn (ví dụ: release)
+            variant.assemble.finalizedBy(installDebugApk)
+        }
+    }
+
+    task installDebugApk(type: Exec, dependsOn: 'assembleDebug') {
+        commandLine './install_apk.sh' # Đường dẫn đến tệp bash hoặc script của bạn
+    }
+}
