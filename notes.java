@@ -81,3 +81,51 @@ android {
         commandLine './install_apk.sh' # Đường dẫn đến tệp bash hoặc script của bạn
     }
 }
+=======
+void writeNDE{
+    if (doodleParams == null)return;
+    JSONObject doodleParamsObject = new JSONObject();
+    int penType = doodleParams.getPenType();
+    int penSize = doodleParams.getPenSize();
+    int penColor = doodleParams.getColor();
+    int isStatic = doodleParams.getIsStatic();
+
+    doodleParamsObject.put(ProjectConstants.PEN_TYPE, penType);
+    doodleParamsObject.put(ProjectConstants.PEN_SIZE, penSize);
+    doodleParamsObject.put(ProjectConstants.PEN_COLOR, penColor);
+    doodleParamsObject.put(ProjectConstants.IS_STATIC, isStatic);
+
+    JSONObject doodlePointsObject = new JSONObject();
+
+    ArrayList<DoodleStrokeWrapper> strokeList = doodleParams.getDoodleStrokeList();
+    for (DoodleStrokeWrapper stroke: strokeList){
+        for (DoodlePointList point: stroke.getPointList()){
+            
+        }
+    }
+
+    int index = 0;
+
+    for (DoodleStrokeWrapper stroke: strokeList) {
+        DoodleStrokeWrapper stroke = strokeList.get(i);
+        JSONArray strokePointsArray = new JSONArray();
+        
+        ArrayList<DoodlePointList> pointList = stroke.getPointList();
+        for (DoodlePointList point : pointList) {
+            JSONObject pointObject = new JSONObject();
+            
+            pointObject.put("x", point.getX());
+            pointObject.put("y", point.getY());
+            pointObject.put("tanx", point.getTanX());
+            pointObject.put("tany", point.getTanY());
+            pointObject.put("pressure", point.getPressure());
+            pointObject.put("timestamp", point.getTimestamp());
+            
+            strokePointsArray.put(pointObject);
+        }
+        
+        doodlePointsObject.put("stroke_" + index++, strokePointsArray);
+    }
+
+    doodleParamsObject.put(ProjectConstants.LIST_STROKE, doodlePointsObject);
+
