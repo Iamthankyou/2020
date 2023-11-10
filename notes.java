@@ -129,3 +129,57 @@ void writeNDE{
 
     doodleParamsObject.put(ProjectConstants.LIST_STROKE, doodlePointsObject);
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+// Chuỗi JSON đầu vào
+String jsonString = "Your_JSON_String_Here";
+
+try {
+    // Tạo đối tượng JSONObject từ chuỗi JSON
+    JSONObject doodlePointsObject = new JSONObject(jsonString);
+
+    // Tạo danh sách chứa nét vẽ
+    ArrayList<DoodleStrokeWrapper> strokeList = new ArrayList<>();
+
+    // Duyệt qua các phần tử của đối tượng JSON
+    for (int i = 0; i < doodlePointsObject.length(); i++) {
+        String key = "stroke_" + i;
+
+        // Trích xuất mảng JSON của mỗi nét vẽ
+        JSONArray strokePointsArray = doodlePointsObject.getJSONArray(key);
+
+        // Tạo danh sách chứa các điểm trong nét vẽ
+        ArrayList<DoodlePointList> pointList = new ArrayList<>();
+
+        // Duyệt qua các phần tử của mảng JSON
+        for (int j = 0; j < strokePointsArray.length(); j++) {
+            // Trích xuất đối tượng JSON của mỗi điểm
+            JSONObject pointObject = strokePointsArray.getJSONObject(j);
+
+            // Tạo đối tượng DoodlePointList từ thông tin điểm
+            DoodlePointList point = new DoodlePointList(
+                pointObject.getDouble("x"),
+                pointObject.getDouble("y"),
+                pointObject.getDouble("tanx"),
+                pointObject.getDouble("tany"),
+                pointObject.getDouble("pressure"),
+                pointObject.getLong("timestamp")
+            );
+
+            // Thêm điểm vào danh sách các điểm của nét vẽ
+            pointList.add(point);
+        }
+
+        // Tạo đối tượng DoodleStrokeWrapper từ danh sách điểm
+        DoodleStrokeWrapper stroke = new DoodleStrokeWrapper(pointList);
+
+        // Thêm nét vẽ vào danh sách các nét vẽ
+        strokeList.add(stroke);
+    }
+
+    // Bây giờ bạn có thể sử dụng danh sách strokeList cho mục đích của mình
+} catch (JSONException e) {
+    e.printStackTrace();
+}
