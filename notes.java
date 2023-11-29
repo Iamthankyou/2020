@@ -255,3 +255,86 @@ try {
 } catch (JSONException e) {
     e.printStackTrace();
 }
+
+======
+- Contribute in 4 new commercialized features: 
+ + Implement speech bubble sticker on single & multi (OneUI 6.0) 
+ + Auto scroll list item when dragging video item (OneUI 6.0)
+ + No longer limited image duration in multi edit (OneUI 6.0)
+ + NDE for studio: adding doodle meta-data for non-destructive in future (OneUI 6.1)
+- Improve perfomance for Samsung studio app:
+ + Use new api for quickly undo/redo doodle many strokes (OneUI 6.0)
+ + Draw quickly auto doodle (OneUI 6.0)
+ + Resolve android not reponding, flickering, crash issues                            "
+
+Feature Development Contribution
+ - Number of contributed development tasks: 16
+ - Main task: 
+  + Support add picker half screen in flex mode (5.1.1)
+  + Update GUI OneUI (5.1.1)
+  + Contribute in implementing new Samsung Studio project on OneUI 6.0/6.1:
+   + Implement speech bubble sticker on OneUI6.0 single & multi
+   + Contribute 130 SVACE for OneUI 6.0
+   + Support add SA log, add new SA log in Samsung Editing Assets
+   + Update GUI Studio multi for tablet
+   + Migrate to new SDK:
+    + Migrate and implementing doodle function with new sdk 
+    + Migrate support change speed in single studio, add slider touch for speed in multi (6.0) 
+    + Add condition for disable/able to revert/save with new SDK
+    + Multi timeline 6.0: 
+   + Check condition deselect video focus when scrolling
+   + Auto scroll list item when dragging video item
+   + Setting Screen for selecting exported format and resolutions  
+   + No longer limited image duration in multi edit
+   + Support add copy preset sticker 
+   + Fix issues timeline
+    + NDE for Studio: + Support project reader/writer: adding doodle metadata info for re-edit 
+  + Performance: 
+   + Change logic undo/redo doodle many strokes
+   + Draw quickly auto doodle with many strokes "
+
+ChatGPT
+Executive Summary:
+
+In the outlined period, I made significant contributions to feature development and performance enhancement within the Samsung Studio app, aligning with the OneUI 6.0 and 6.1 updates. Below are the key highlights of my contributions:
+
+Highlighted Contributions:
+
+New Commercialized Features (OneUI 6.0 and 6.1):
+
+Implemented speech bubble sticker for both single and multi modes.
+Enabled auto-scroll functionality for list items while dragging video items.
+Removed image duration limitations in multi-edit mode.
+Introduced Non-Destructive Editing (NDE) for Studio by adding doodle metadata for future non-destructive edits (OneUI 6.1).
+Performance Improvements for Samsung Studio App (OneUI 6.0):
+
+Utilized a new API to enhance the speed of undo/redo operations for doodles.
+Implemented a feature for quickly auto-doodling.
+Resolved issues related to Android not responding, flickering, and crashes.
+Feature Development Contribution:
+
+Number of Development Tasks: 16
+
+Main Tasks (OneUI 5.1.1):
+
+Supported the addition of a picker half screen in flex mode.
+Updated the graphical user interface (GUI) for OneUI.
+Contributed to the implementation of the new Samsung Studio project on OneUI 6.0/6.1.
+Specific Contributions to Samsung Studio (OneUI 6.0/6.1):
+
+Implemented speech bubble sticker for both single and multi modes.
+Contributed 130 SVACE for OneUI 6.0.
+Supported the addition of SA log and new SA log in Samsung Editing Assets.
+Updated GUI for Studio multi on tablets.
+Migrated to a new software development kit (SDK) with tasks including implementing doodle functions and supporting speed changes in single and multi studios.
+Added conditions for disable/enable to revert/save with the new SDK.
+Implemented features for multi-timeline 6.0, including handling video focus deselection during scrolling and setting screens for selecting export formats and resolutions.
+Removed image duration limitations in multi-edit mode.
+Supported the addition of copy preset stickers.
+Resolved timeline-related issues.
+Contributed to NDE for Studio by supporting project reader/writer and adding doodle metadata information for re-edit.
+Performance Enhancement:
+
+Modified the logic for undo/redo doodles with many strokes.
+Enabled quick auto-doodling with many strokes.
+These contributions collectively enhanced the user experience and performance of the Samsung Studio app, aligning it with the latest OneUI updates and ensuring a seamless and feature-rich environment for users.
