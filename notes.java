@@ -371,3 +371,30 @@ if (startIndex != -1) {
 }
 
 // diff giờ chứa tất cả các phần tử khác biệt kể từ điểm bắt đầu sự khác biệt
+
+
+import java.util.List;
+
+List<Integer> current = ...; // List hiện tại
+List<Integer> newList = ...; // List mới
+int indexToChange = -1;
+
+// Tìm điểm khác biệt đầu tiên
+for (int i = 0; i < Math.min(current.size(), newList.size()); i++) {
+    if (!current.get(i).equals(newList.get(i))) {
+        indexToChange = i;
+        break;
+    }
+}
+
+// Nếu không có sự khác biệt nào được tìm thấy và newList dài hơn, điểm khác biệt là độ dài của current
+if (indexToChange == -1 && newList.size() > current.size()) {
+    indexToChange = current.size();
+}
+
+// Tính toán số phần tử cần xóa và thêm
+int numToDelete = (indexToChange != -1) ? current.size() - indexToChange : 0;
+int numToAdd = (indexToChange != -1) ? newList.size() - indexToChange : newList.size();
+
+System.out.println("Số lượng phần tử cần xóa: " + numToDelete);
+System.out.println("Số lượng phần tử cần thêm: " + numToAdd);
