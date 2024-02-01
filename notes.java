@@ -330,6 +330,12 @@ Migrated to a new software development kit (SDK) with tasks including implementi
 Added conditions for disable/enable to revert/save with the new SDK.
 Implemented features for multi-timeline 6.0, including handling video focus deselection during scrolling and setting screens for selecting export formats and resolutions.
 Removed image duration limitations in multi-edit mode.
+
+
+
+
+
+    
 Supported the addition of copy preset stickers.
 Resolved timeline-related issues.
 Contributed to NDE for Studio by supporting project reader/writer and adding doodle metadata information for re-edit.
@@ -338,3 +344,30 @@ Performance Enhancement:
 Modified the logic for undo/redo doodles with many strokes.
 Enabled quick auto-doodling with many strokes.
 These contributions collectively enhanced the user experience and performance of the Samsung Studio app, aligning it with the latest OneUI updates and ensuring a seamless and feature-rich environment for users.
+
+
+    import java.util.ArrayList;
+import java.util.List;
+
+// Giả sử current và new là hai List<String> (hoặc bất kỳ kiểu dữ liệu nào khác phù hợp)
+List<String> current = ...;
+List<String> newList = ...;
+List<String> diff = new ArrayList<>();
+
+// Tìm điểm bắt đầu sự khác biệt
+int startIndex = -1;
+for (int i = 0; i < Math.min(current.size(), newList.size()); i++) {
+    if (!current.get(i).equals(newList.get(i))) {
+        startIndex = i;
+        break;
+    }
+}
+
+// Nếu có sự khác biệt, thêm các phần tử còn lại từ newList vào diff
+if (startIndex != -1) {
+    for (int i = startIndex; i < newList.size(); i++) {
+        diff.add(newList.get(i));
+    }
+}
+
+// diff giờ chứa tất cả các phần tử khác biệt kể từ điểm bắt đầu sự khác biệt
