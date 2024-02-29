@@ -398,3 +398,81 @@ int numToAdd = (indexToChange != -1) ? newList.size() - indexToChange : newList.
 
 System.out.println("Số lượng phần tử cần xóa: " + numToDelete);
 System.out.println("Số lượng phần tử cần thêm: " + numToAdd);
+
+
+Để sử dụng `TableLayout` cho việc hiển thị thời gian với định dạng phút:giây.mili giây (ví dụ, 00:00.00) trong Android, bạn có thể tuân theo các bước sau để thiết kế giao diện:
+
+1. **Định nghĩa TableLayout trong XML:**
+
+   Bạn sẽ cần một `TableLayout` với một `TableRow`. Trong `TableRow` này, bạn sẽ đặt các `TextView` cho phút, giây và mili giây, cũng như các dấu hai chấm và dấu chấm để tách chúng.
+
+   ```xml
+   <TableLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:stretchColumns="*"
+       android:id="@+id/tableLayout"
+       xmlns:android="http://schemas.android.com/apk/res/android">
+
+       <TableRow>
+           <TextView
+               android:id="@+id/minutesTextView"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="00"
+               android:gravity="center"
+               android:textSize="20sp" />
+
+           <TextView
+               android:text=":"
+               android:gravity="center"
+               android:textSize="20sp" />
+
+           <TextView
+               android:id="@+id/secondsTextView"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="00"
+               android:gravity="center"
+               android:textSize="20sp" />
+
+           <TextView
+               android:text="."
+               android:gravity="center"
+               android:textSize="20sp" />
+
+           <TextView
+               android:id="@+id/millisTextView"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="00"
+               android:gravity="center"
+               android:textSize="20sp" />
+       </TableRow>
+   </TableLayout>
+   ```
+
+2. **Cập Nhật TextView Trong Mã Java/Kotlin:**
+
+   Bạn sẽ cần cập nhật giá trị của các `TextView` (`minutesTextView`, `secondsTextView`, `millisTextView`) dựa trên bộ đếm thời gian của bạn. Dưới đây là một ví dụ cách bạn có thể thực hiện điều này trong mã Java:
+
+   ```java
+   // Giả sử bạn có một bộ đếm thời gian và cập nhật TextView trong một hàm cập nhật UI
+   public void updateTimer(int minutes, int seconds, int millis) {
+       TextView minutesView = findViewById(R.id.minutesTextView);
+       TextView secondsView = findViewById(R.id.secondsTextView);
+       TextView millisView = findViewById(R.id.millisTextView);
+
+       minutesView.setText(String.format("%02d", minutes));
+       secondsView.setText(String.format("%02d", seconds));
+       millisView.setText(String.format("%02d", millis));
+   }
+   ```
+
+   Trong ví dụ này, `%02d` đảm bảo rằng số luôn được hiển thị dưới dạng hai chữ số, giúp giữ cho chiều rộng của `TextView` ổn định.
+
+3. **Thiết kế và Định vị:**
+
+   Bạn có thể điều chỉnh thiết kế và định vị của `TableLayout` và `TextView` bằng cách thay đổi các thuộc tính như `android:layout_margin`, `android:padding`, `android:textSize`, và `android:textStyle`. Điều này giúp bạn tạo ra một giao diện người dùng phù hợp và dễ nhìn.
+
+Lưu ý rằng `TableLayout` trong Android tự động điều chỉnh các cột để chúng phù hợp với nội dung, do đó giữ cho layout của bạn được tổ chức và dễ quản lý.
