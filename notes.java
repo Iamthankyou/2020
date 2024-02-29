@@ -476,3 +476,98 @@ System.out.println("Số lượng phần tử cần thêm: " + numToAdd);
    Bạn có thể điều chỉnh thiết kế và định vị của `TableLayout` và `TextView` bằng cách thay đổi các thuộc tính như `android:layout_margin`, `android:padding`, `android:textSize`, và `android:textStyle`. Điều này giúp bạn tạo ra một giao diện người dùng phù hợp và dễ nhìn.
 
 Lưu ý rằng `TableLayout` trong Android tự động điều chỉnh các cột để chúng phù hợp với nội dung, do đó giữ cho layout của bạn được tổ chức và dễ quản lý.
+
+    Bạn đúng, nếu mục tiêu là ngăn chặn mọi sự "nhảy" hoặc thay đổi trong chiều rộng của các phần tử khi giá trị thay đổi, một giải pháp tốt hơn là chia mỗi chữ số thành một `TextView` riêng biệt. Điều này đảm bảo rằng mỗi chữ số được giữ cố định về mặt không gian và chỉ có nội dung bên trong thay đổi, không làm ảnh hưởng đến layout tổng thể.
+
+Dưới đây là cách bạn có thể cấu trúc `TableLayout` trong trường hợp này:
+
+```xml
+<TableLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/tableLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TableRow>
+        <!-- Phút -->
+        <TextView
+            android:id="@+id/minuteTensTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:gravity="center"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/minuteOnesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:gravity="center"
+            android:textSize="20sp" />
+
+        <!-- Dấu hai chấm phân cách -->
+        <TextView
+            android:text=":"
+            android:gravity="center"
+            android:textSize="20sp" />
+
+        <!-- Giây -->
+        <TextView
+            android:id="@+id/secondTensTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:gravity="center"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/secondOnesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:gravity="center"
+            android:textSize="20sp" />
+
+        <!-- Dấu chấm phân cách -->
+        <TextView
+            android:text="."
+            android:gravity="center"
+            android:textSize="20sp" />
+
+        <!-- Mili giây -->
+        <TextView
+            android:id="@+id/milliHundredsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:gravity="center"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/milliTensTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:gravity="center"
+            android:textSize="20sp" />
+    </TableRow>
+</TableLayout>
+```
+
+Trong mã Java hoặc Kotlin của bạn, bạn sẽ cập nhật mỗi `TextView` này một cách độc lập dựa trên bộ đếm thời gian:
+
+```java
+public void updateTimer(int minutes, int seconds, int millis) {
+    // Ví dụ, chia phút thành hai phần
+    ((TextView)findViewById(R.id.minuteTensTextView)).setText(String.valueOf((minutes / 10)));
+    ((TextView)findViewById(R.id.minuteOnesTextView)).setText(String.valueOf((minutes % 10)));
+
+    // Tương tự cho giây và mili giây
+    ((TextView)findViewById(R.id.secondTensTextView)).setText(String.valueOf((seconds / 10)));
+    ((TextView)findViewById(R.id.secondOnesTextView)).setText(String.valueOf((seconds % 10)));
+
+    // Đối với mili giây, giả sử bạn đang gửi toàn bộ giá trị mili giây (ví dụ: 123)
+    ((TextView)findViewById(R.id.milliHundredsTextView)).setText(String.valueOf((millis / 100)));
+    ((TextView)findViewById(R.id.milliTensTextView)).setText(String.valueOf((millis / 10) % 10));
+}
+```
+
+Cách tiếp cận này giúp đảm bảo rằng chiều rộng của mỗi phần tử không thay đổi khi giá trị của chúng cập nhật, do đó ngăn ch
